@@ -1,0 +1,12 @@
+{
+  "name": "astro-hub",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Astro Hub web app",
+  "scripts": {
+    "start": "node \"web app/index.js\""
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

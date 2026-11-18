@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: astro-hub
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NASA_API_KEY
+        sync: false
+      - key: ASTROHUB_TOKEN_SECRET
+        generateValue: true

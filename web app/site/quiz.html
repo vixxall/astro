@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Astronomy Quiz - Astro Hub</title>
+  <meta name="description" content="Test your space knowledge with a 10-question interactive astronomy quiz." />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="galaxy-bg"></div>
+  <div class="stars"></div>
+  <div id="navbar"></div>
+
+  <canvas id="confettiCanvas"></canvas>
+
+  <section class="page-header container pb-0">
+    <span class="chip mb-3">🧠 Astronomy Quiz</span>
+    <h1 class="fw-bold display-5">Astro <span class="gradient-text">Trivia Challenge</span></h1>
+    <p class="section-subtitle mt-2">Answer 10 astronomy questions, review your results, and see how well you know the cosmos.</p>
+  </section>
+
+  <section class="container pb-5">
+    <!-- 1. SETUP BOX -->
+    <div id="setupBox" class="row justify-content-center">
+      <div class="col-xl-10">
+        <div class="quiz-dashboard-card">
+          <div class="row g-4">
+            <!-- Left Side: Config -->
+            <div class="col-lg-7">
+              <h4 class="fw-bold mb-4"><i class="fa-solid fa-sliders text-cyan me-2"></i>Configure Mission</h4>
+              
+              <!-- Category -->
+              <div class="mb-4">
+                <label class="form-label fw-semibold text-muted-space small uppercase mb-3">Select Category</label>
+                <div class="row g-2" id="categoryGrid">
+                  <div class="col-6">
+                    <div class="category-card selected" data-category="all">
+                      <i class="category-icon fa-solid fa-globe"></i>
+                      <div class="fw-semibold small">All Topics</div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="category-card" data-category="Solar System">
+                      <i class="category-icon fa-solid fa-sun"></i>
+                      <div class="fw-semibold small">Solar System</div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="category-card" data-category="Galaxies">
+                      <i class="category-icon fa-solid fa-circle-notch"></i>
+                      <div class="fw-semibold small">Galaxies & Holes</div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="category-card" data-category="Missions">
+                      <i class="category-icon fa-solid fa-shuttle-space"></i>
+                      <div class="fw-semibold small">Space Missions</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Mode Selection -->
+              <div class="mb-4">
+                <label class="form-label fw-semibold text-muted-space small uppercase mb-3">Choose Game Mode</label>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <div class="mode-card selected" data-mode="explorer">
+                      <h6 class="fw-bold text-cyan mb-2"><i class="fa-solid fa-compass me-2"></i>Explorer</h6>
+                      <p class="small text-muted-space mb-0">Untimed. Immediate feedback with detailed explanations. Perfect for learning.</p>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="mode-card" data-mode="challenger">
+                      <h6 class="fw-bold text-purple mb-2"><i class="fa-solid fa-stopwatch me-2"></i>Challenger</h6>
+                      <p class="small text-muted-space mb-0">15s per question. No instant correction. Score based on speed & streaks. Leaderboard active.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="chip mb-2"><i class="fa-solid fa-list-ol me-1"></i>10 Sample Questions</div>
+
+              <!-- Launch button -->
+              <button class="btn btn-space btn-lg w-100 mt-3" id="launchBtn">
+              <i class="fa-solid fa-rocket me-2"></i>Start Quiz
+              </button>
+            </div>
+
+            <!-- Right Side: Leaderboard -->
+            <div class="col-lg-5 ps-lg-4">
+              <h4 class="fw-bold mb-4"><i class="fa-solid fa-trophy text-warning me-2"></i>Leaderboard</h4>
+              <div class="leaderboard-table p-3">
+                <table class="table table-borderless mb-0">
+                  <thead>
+                    <tr>
+                      <th scope="col" style="width:10%">#</th>
+                      <th scope="col" style="width:50%">Pilot</th>
+                      <th scope="col" style="width:20%">Topic</th>
+                      <th scope="col" style="width:20%" class="text-end">Score</th>
+                    </tr>
+                  </thead>
+                  <tbody id="leaderboardBody">
+                    <!-- Loaded dynamically via js -->
+                  </tbody>
+                </table>
+                <div id="leaderboardEmpty" class="text-center text-muted-space small py-4 d-none">
+                  No records yet. Be the first to conquer Challenger Mode!
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. PLAYING BOX -->
+    <div id="quizBox" class="row justify-content-center d-none">
+      <div class="col-lg-8">
+        <div class="space-card p-4 p-md-5">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <div>
+              <span class="chip" id="quizCategory">Category</span>
+              <span class="streak-badge d-none ms-2" id="quizStreak"><i class="fa-solid fa-fire"></i> <span id="streakCount">0</span></span>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+              <!-- Radial Timer (active in challenger mode) -->
+              <div class="timer-container d-none" id="quizTimer">
+                <svg class="timer-svg">
+                  <circle class="timer-circle-bg" cx="22" cy="22" r="18"></circle>
+                  <circle class="timer-circle" id="timerCircle" cx="22" cy="22" r="18" stroke-dasharray="113" stroke-dashoffset="0"></circle>
+                </svg>
+                <div class="timer-text" id="timerSeconds">15</div>
+              </div>
+              <span class="text-muted-space small" id="quizCounter">Question 1 of 10</span>
+            </div>
+          </div>
+
+          <!-- Progress bar -->
+          <div class="progress mb-4" role="progressbar" aria-label="Quiz progress" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar" id="quizProgress" style="width:10%"></div>
+          </div>
+
+          <h4 class="fw-bold mb-4" id="quizQuestion">Question text...</h4>
+
+          <!-- Options -->
+          <div id="quizOptions"></div>
+
+          <!-- Lifelines Toolbar -->
+          <div class="d-flex flex-wrap gap-2 mt-4 pt-3 border-top border-soft justify-content-between align-items-center">
+            <div class="d-flex gap-2">
+              <button class="lifeline-btn" id="lifeline5050" title="Remove two incorrect options">
+                <i class="fa-solid fa-split"></i> 50/50
+              </button>
+              <button class="lifeline-btn" id="lifelineHint" title="Reveal a clue for this question">
+                <i class="fa-solid fa-lightbulb"></i> Hint
+              </button>
+            </div>
+            <button class="lifeline-btn" id="lifelineSkip" title="Skip this question (counts as incorrect)">
+              <i class="fa-solid fa-forward"></i> Skip
+            </button>
+          </div>
+
+          <!-- Explanation display (Explorer Mode only) -->
+          <div id="explanationCard" class="explanation-card d-none">
+            <div class="fw-bold text-cyan mb-1" id="explanationType"><i class="fa-solid fa-circle-info me-2"></i>Fact File</div>
+            <div id="explanationText" class="small text-light">Explanation content goes here...</div>
+          </div>
+
+          <!-- Controls -->
+          <div class="d-flex justify-content-between mt-4">
+            <button class="btn btn-outline-space" id="prevBtn">
+              <i class="fa-solid fa-arrow-left me-1"></i>Previous
+            </button>
+            <button class="btn btn-space" id="nextBtn">
+              Next <i class="fa-solid fa-arrow-right ms-1"></i>
+            </button>
+            <button class="btn btn-space d-none" id="submitBtn">
+              <i class="fa-solid fa-flag-checkered me-1"></i>Submit Quiz
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. RESULTS BOX -->
+    <div id="quizResults" class="row justify-content-center d-none">
+      <div class="col-lg-8">
+        <div class="space-card p-4 p-md-5 text-center">
+          <div class="score-circle">
+            <div class="display-5 fw-bold" id="resultPct">0%</div>
+            <div class="small" id="resultCorrect">0/0</div>
+          </div>
+          <h3 class="fw-bold mb-2" id="resultTitle">Outstanding!</h3>
+          <p class="text-muted-space mb-4" id="resultMsg">You're a true space expert.</p>
+
+          <!-- Leaderboard Entry Form (Challenger mode only) -->
+          <div id="leaderboardEntryForm" class="bg-panel p-4 rounded-4 mb-4 d-none">
+            <h5 class="fw-bold mb-2 text-warning"><i class="fa-solid fa-trophy me-2"></i>Record Your Score</h5>
+            <p class="small text-muted-space mb-3">You made the top rankings! Enter your callsign to immortalize your score.</p>
+            <div class="input-group justify-content-center" style="max-width: 400px; margin: 0 auto;">
+              <input type="text" id="leaderboardName" class="form-control" placeholder="PILOT CALLSIGN" maxlength="12" style="text-transform: uppercase;">
+              <button class="btn btn-space" id="submitScoreBtn">Submit</button>
+            </div>
+          </div>
+
+          <!-- Stats Grid -->
+          <div class="row g-3 justify-content-center my-4">
+            <div class="col-6 col-sm-3">
+              <div class="bg-panel p-3 rounded-4 border border-soft">
+                <div class="fs-4 fw-bold text-success" id="statCorrect">0</div>
+                <div class="text-muted-space small">Correct</div>
+              </div>
+            </div>
+            <div class="col-6 col-sm-3">
+              <div class="bg-panel p-3 rounded-4 border border-soft">
+                <div class="fs-4 fw-bold text-danger" id="statIncorrect">0</div>
+                <div class="text-muted-space small">Incorrect</div>
+              </div>
+            </div>
+            <div class="col-6 col-sm-3">
+              <div class="bg-panel p-3 rounded-4 border border-soft">
+                <div class="fs-4 fw-bold text-info" id="statStreak">0</div>
+                <div class="text-muted-space small">Max Streak</div>
+              </div>
+            </div>
+            <div class="col-6 col-sm-3">
+              <div class="bg-panel p-3 rounded-4 border border-soft">
+                <div class="fs-4 fw-bold text-warning" id="statTime">0s</div>
+                <div class="text-muted-space small">Total Time</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-center gap-3 my-4">
+            <button class="btn btn-space" id="restartBtn">
+              <i class="fa-solid fa-rotate-right me-1"></i>Play Again
+            </button>
+            <button class="btn btn-outline-space" id="menuBtn">
+              <i class="fa-solid fa-sliders me-1"></i>Setup Screen
+            </button>
+          </div>
+
+          <!-- Review Answers Accordion -->
+          <div class="text-start mt-5">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h5 class="fw-bold mb-0">Mission Debrief</h5>
+              <select class="form-select form-select-sm" id="reviewFilter" style="width: 150px;">
+                <option value="all">All Answers</option>
+                <option value="correct">Correct Only</option>
+                <option value="incorrect">Incorrect Only</option>
+              </select>
+            </div>
+            <div id="reviewList" class="d-flex flex-column gap-3">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer"></div>
+
+  <script>window.ACTIVE_PAGE = "quiz.html";</script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

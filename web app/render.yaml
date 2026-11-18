@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: astro-hub
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: PORT
+        value: 3001
+      - key: NASA_API_KEY
+        value: DEMO_KEY
+      - key: ASTROHUB_TOKEN_SECRET
+        generateValue: true

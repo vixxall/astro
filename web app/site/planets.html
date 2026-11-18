@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Planet Explorer - Astro Hub</title>
+  <meta name="description" content="Explore all 8 planets of our Solar System with detailed facts, images and figures." />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="galaxy-bg"></div>
+  <div class="stars"></div>
+  <div id="navbar"></div>
+
+  <!-- Page header -->
+  <section class="page-header container">
+    <span class="chip mb-3">🪐 Planet Explorer</span>
+    <h1 class="fw-bold display-5">The <span class="gradient-text">8 Planets</span> of Our Solar System</h1>
+    <p class="section-subtitle mt-2">Click any planet to explore its atmosphere, surface, orbit and fascinating facts.</p>
+  </section>
+
+  <!-- Planet cards grid (filled by script.js) -->
+  <section class="container pb-5">
+    <div class="row g-4" id="planetGrid"></div>
+
+    <div class="space-card overflow-hidden mt-4 reveal">
+      <div class="row g-0 align-items-center">
+        <div class="col-lg-4 text-center p-4">
+          <img src="images/moon.png" alt="Earth's Moon" class="planet-img" />
+        </div>
+        <div class="col-lg-8 p-4 p-lg-5">
+          <span class="chip mb-3"><i class="fa-solid fa-moon me-2"></i>Moon Information Card</span>
+          <h3 class="fw-bold mb-3">Earth's Moon</h3>
+          <p class="text-muted-space mb-4">The Moon is Earth's only natural satellite and the brightest object in our night sky. It helps shape tides and has inspired human exploration for centuries.</p>
+          <div class="row g-3">
+            <div class="col-sm-6 col-md-4"><div class="space-card p-3 h-100"><div class="text-muted-space small">Type</div><strong>Natural Satellite</strong></div></div>
+            <div class="col-sm-6 col-md-4"><div class="space-card p-3 h-100"><div class="text-muted-space small">Distance from Earth</div><strong>384,400 km</strong></div></div>
+            <div class="col-sm-6 col-md-4"><div class="space-card p-3 h-100"><div class="text-muted-space small">Diameter</div><strong>3,474 km</strong></div></div>
+            <div class="col-sm-6 col-md-4"><div class="space-card p-3 h-100"><div class="text-muted-space small">Gravity</div><strong>1.62 m/s²</strong></div></div>
+            <div class="col-sm-6 col-md-4"><div class="space-card p-3 h-100"><div class="text-muted-space small">Average Temperature</div><strong>-20°C</strong></div></div>
+            <div class="col-sm-6 col-md-4"><div class="space-card p-3 h-100"><div class="text-muted-space small">Orbital Period</div><strong>27.3 days</strong></div></div>
+            <div class="col-sm-6 col-md-4"><div class="space-card p-3 h-100"><div class="text-muted-space small">Rotation Period</div><strong>27.3 days</strong></div></div>
+            <div class="col-sm-6 col-md-4"><div class="space-card p-3 h-100"><div class="text-muted-space small">Age</div><strong>~4.5 billion years</strong></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer"></div>
+
+  <script>window.ACTIVE_PAGE = "planets.html";</script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

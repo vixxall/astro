@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Astro Hub - Explore the Wonders of the Universe</title>
+  <meta name="description"
+    content="Astro Hub is an educational astronomy platform for students and space enthusiasts. Explore planets, space missions, NASA images and quizzes." />
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <!-- Our Styles -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- Space background layers -->
+  <div class="galaxy-bg"></div>
+  <div class="stars"></div>
+
+  <!-- Navbar (injected by script.js) -->
+  <div id="navbar"></div>
+
+  <!-- ============ HERO SECTION ============ -->
+  <header class="hero" style="background-image:url('images/solar-system-3840x2160-12831.jpg')">
+    <div class="container hero-content">
+      <div class="row">
+        <div class="col-lg-8">
+            <div class="hero-search-wrapper mb-3">
+            <div class="search-shell hero-search-shell mx-auto mx-lg-0">
+              <i class="fa-solid fa-magnifying-glass search-icon"></i>
+              <input type="text" id="globalSearchInput" class="search-input" placeholder="Search planets, missions, stars..." aria-label="Search Astro Hub" />
+              <div id="globalSearchResults" class="search-results" role="listbox"></div>
+            </div>
+          </div>
+          <span class="chip mb-3">🌌 Educational Astronomy Platform</span>
+        
+          <h1 class="mb-3">Explore the <span class="gradient-text">Wonders</span> of the Universe</h1>
+          <p class="fs-5 text-muted-space mb-4" style="max-width:600px">
+            Journey through the planets, discover legendary space missions, browse stunning
+            NASA imagery and test your knowledge with fun astronomy quizzes.
+          </p>
+          <div class="d-flex flex-wrap gap-3">
+            <a href="planets.html" class="btn btn-space btn-lg">
+              <i class="fa-solid fa-rocket me-2"></i>Explore Now
+            </a>
+            <a href="quiz.html" class="btn btn-outline-space btn-lg">
+              <i class="fa-solid fa-brain me-2"></i>Take the Quiz
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ FEATURE CARDS ============ -->
+  <section class="container py-5">
+    <div class="text-center">
+      <h2 class="section-title">What You Can <span class="gradient-text">Explore</span></h2>
+      <p class="section-subtitle">Four ways to dive into the cosmos with Astro Hub.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3 reveal">
+        <a href="planets.html" class="text-decoration-none text-reset">
+          <div class="space-card text-center p-4">
+            <div class="icon-circle mx-auto"><i class="fa-solid fa-globe"></i></div>
+            <h5 class="fw-bold">🪐 Solar System Explorer</h5>
+            <p class="text-muted-space small mb-0">Discover all 8 planets of our solar system with detailed facts and
+              figures.</p>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-6 col-lg-3 reveal">
+        <a href="missions.html" class="text-decoration-none text-reset">
+          <div class="space-card text-center p-4">
+            <div class="icon-circle mx-auto"><i class="fa-solid fa-rocket"></i></div>
+            <h5 class="fw-bold">🚀 Space Missions</h5>
+            <p class="text-muted-space small mb-0">Explore historic NASA and ISRO missions to the stars.</p>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-6 col-lg-3 reveal">
+        <a href="gallery.html" class="text-decoration-none text-reset">
+          <div class="space-card text-center p-4">
+            <div class="icon-circle mx-auto"><i class="fa-solid fa-images"></i></div>
+            <h5 class="fw-bold">📸 NASA Gallery</h5>
+            <p class="text-muted-space small mb-0">Browse a stunning gallery of space imagery.</p>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-6 col-lg-3 reveal">
+        <a href="quiz.html" class="text-decoration-none text-reset">
+          <div class="space-card text-center p-4">
+            <div class="icon-circle mx-auto"><i class="fa-solid fa-brain"></i></div>
+            <h5 class="fw-bold">🧠 Astronomy Quiz</h5>
+            <p class="text-muted-space small mb-0">Test your space knowledge with 10 questions.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEATURED DISCOVERIES ============ -->
+  <section class="container py-5">
+    <div class="row g-4">
+      <div class="col-lg-6 reveal">
+        <div class="space-card h-100">
+          <div class="row g-0 h-100 align-items-center">
+            <div class="col-sm-5 text-center p-4">
+              <img src="images/Screenshot 2026-07-10 191516.png" alt="Aditya-L1 spacecraft" class="planet-img" />
+            </div>
+            <div class="col-sm-7">
+              <div class="card-body">
+                <span class="chip mb-2"><i class="fa-solid fa-rocket me-1"></i>Latest Featured Mission</span>
+                <h3 class="fw-bold mt-2">Aditya-L1</h3>
+                <p class="text-muted-space small mb-3">India's first solar observatory studies the Sun from the
+                  Sun-Earth L1 point.</p>
+                <div class="planet-meta mb-3">
+                  <div class="mb-1"><i class="fa-solid fa-building"></i> ISRO</div>
+                  <div><i class="fa-solid fa-calendar"></i> Launched September 2, 2023</div>
+                </div>
+                <a href="missions.html" class="btn btn-space btn-sm">Explore Mission <i
+                    class="fa-solid fa-arrow-right ms-1"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 reveal">
+        <div class="space-card h-100">
+          <div class="row g-0 h-100 align-items-center">
+            <div class="col-sm-5 text-center p-4">
+              <img src="images/earth.png" alt="Planet Earth" class="planet-img" />
+            </div>
+            <div class="col-sm-7">
+              <div class="card-body">
+                <span class="chip mb-2"><i class="fa-solid fa-globe me-1"></i>Featured Planet</span>
+                <h3 class="fw-bold mt-2">Earth</h3>
+                <p class="text-muted-space small mb-3">Our blue home is the only known world to support life.</p>
+                <div class="planet-meta mb-3">
+                  <div class="mb-1"><i class="fa-solid fa-sun"></i> 149.6 million km from the Sun</div>
+                  <div><i class="fa-solid fa-moon"></i> 1 natural moon</div>
+                </div>
+                <a href="planet-detail.html?id=earth" class="btn btn-space btn-sm">Explore Earth <i
+                    class="fa-solid fa-arrow-right ms-1"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ NASA IMAGE OF THE DAY ============ -->
+  <section class="container py-5">
+    <div class="text-center">
+      <h2 class="section-title">NASA Image of the <span class="gradient-text">Day</span></h2>
+      <p class="section-subtitle">A daily view of the universe from NASA's Astronomy Picture of the Day.</p>
+    </div>
+
+    <!-- Date Explorer Panel -->
+    <div class="row justify-content-center mb-4 reveal">
+      <div class="col-md-8 col-lg-6">
+        <div class="d-flex align-items-center justify-content-center flex-wrap gap-2 nasa-explorer-panel">
+          <label for="nasaDatePicker" class="text-muted-space small fw-bold mb-0 me-2">Explore Date:</label>
+          <input type="date" id="nasaDatePicker" class="form-control d-inline-block w-auto nasa-date-input" />
+          <button id="nasaTodayBtn" class="btn btn-outline-space btn-sm" title="View Today's Image">
+            <i class="fa-solid fa-calendar-day me-1"></i>Today
+          </button>
+          <button id="nasaRandomBtn" class="btn btn-outline-space btn-sm" title="Explore Random Date">
+            <i class="fa-solid fa-shuffle me-1"></i>Random
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <article class="space-card nasa-card-glass overflow-hidden reveal" aria-labelledby="nasaTitle">
+      <!-- Skeleton Loading State -->
+      <div id="nasaSkeleton" class="row g-0">
+        <div class="col-lg-6">
+          <div class="skeleton-media shimmer-bg"></div>
+        </div>
+        <div class="col-lg-6">
+          <div class="p-4 p-lg-5 d-flex flex-column h-100 justify-content-center">
+            <div class="skeleton-chip shimmer-bg"></div>
+            <div class="skeleton-title shimmer-bg"></div>
+            <div class="skeleton-date shimmer-bg"></div>
+            <div class="skeleton-text shimmer-bg"></div>
+            <div class="skeleton-text shimmer-bg"></div>
+            <div class="skeleton-text shimmer-bg"></div>
+            <div class="skeleton-button shimmer-bg"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Real Content State -->
+      <div id="nasaContent" class="row g-0 d-none">
+        <div class="col-lg-6">
+          <div class="nasa-media-wrapper" id="nasaMediaWrapper">
+            <!-- Image media placeholder -->
+            <img id="nasaImage" class="nasa-image fit-cover" src="images/nebula.png"
+              alt="Astronomy image of a nebula" />
+
+            <!-- Video media placeholder (initially empty) -->
+            <div id="nasaVideoWrapper" class="nasa-video-container d-none w-100 p-2">
+              <iframe id="nasaVideo" src=""
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+            </div>
+
+            <!-- Overlays -->
+            <div class="nasa-media-overlay">
+              <button id="nasaFavBtn" class="nasa-action-btn" aria-label="Add to favorites" title="Add to Favorites">
+                <i class="fa-solid fa-heart"></i>
+              </button>
+            </div>
+            <div class="nasa-media-bottom-overlay">
+              <button id="nasaAspectBtn" class="nasa-action-btn" title="Toggle Aspect Fit/Fill"
+                aria-label="Toggle Image Aspect Ratio">
+                <i class="fa-solid fa-expand"></i>
+              </button>
+              <button id="nasaHdBtn" class="nasa-action-btn" title="View High-Definition Image"
+                aria-label="View HD Resolution">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="p-4 p-lg-5 d-flex flex-column h-100 justify-content-center">
+            <span class="chip mb-3"><i class="fa-solid fa-satellite-dish me-1"></i>NASA APOD</span>
+            <h3 class="fw-bold mb-3" id="nasaTitle">Loading today's image...</h3>
+            <p class="text-muted-space small mb-3" id="nasaDate"><i class="fa-solid fa-calendar me-2"></i>Loading
+              date...</p>
+
+            <div class="position-relative">
+              <p class="text-muted-space desc-collapsed mb-3" id="nasaDescription">Fetching today's astronomy picture
+                from NASA.</p>
+              <button id="nasaReadMoreBtn" class="read-more-btn" style="display: none;">Read More</button>
+            </div>
+
+            <div class="d-flex align-items-center gap-2">
+              <a id="nasaLink" href="gallery.html" class="btn btn-space align-self-start" target="_blank"
+                rel="noopener noreferrer">
+                View Full Image <i class="fa-solid fa-arrow-right ms-2"></i>
+              </a>
+              <a id="nasaDownloadBtn" href="#" class="btn btn-outline-space align-self-start" target="_blank" download
+                title="Download Image/View Raw URL">
+                <i class="fa-solid fa-download"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ DAILY SPACE FACT ============ -->
+  <section class="container py-5">
+    <div class="space-card p-5 text-center reveal"
+      style="background:linear-gradient(135deg, rgba(79,139,255,.15), rgba(138,92,255,.15))">
+      <div class="icon-circle mx-auto"><i class="fa-solid fa-lightbulb"></i></div>
+      <h3 class="fw-bold mb-3">Daily Space Fact</h3>
+      <p class="fs-4 mb-0" id="dailyFact">Loading a cosmic fact...</p>
+    </div>
+  </section>
+
+  <!-- ============ WHY CHOOSE ASTRO HUB ============ -->
+  <section class="container py-5">
+    <div class="text-center">
+      <h2 class="section-title">Why Choose <span class="gradient-text">Astro Hub</span>?</h2>
+      <p class="section-subtitle">Learning about space has never been this engaging.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3 reveal">
+        <div class="space-card text-center p-4">
+          <div class="icon-circle mx-auto"><i class="fa-solid fa-graduation-cap"></i></div>
+          <h5 class="fw-bold">Interactive Learning</h5>
+          <p class="text-muted-space small mb-0">Engaging content designed to make astronomy easy and fun.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 reveal">
+        <div class="space-card text-center p-4">
+          <div class="icon-circle mx-auto"><i class="fa-solid fa-satellite"></i></div>
+          <h5 class="fw-bold">Space Missions</h5>
+          <p class="text-muted-space small mb-0">Learn about the greatest missions from NASA, ISRO and more.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 reveal">
+        <div class="space-card text-center p-4">
+          <div class="icon-circle mx-auto"><i class="fa-solid fa-camera"></i></div>
+          <h5 class="fw-bold">NASA Images</h5>
+          <p class="text-muted-space small mb-0">A curated gallery of breathtaking cosmic photography.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 reveal">
+        <div class="space-card text-center p-4">
+          <div class="icon-circle mx-auto"><i class="fa-solid fa-puzzle-piece"></i></div>
+          <h5 class="fw-bold">Fun Quizzes</h5>
+          <p class="text-muted-space small mb-0">Challenge yourself and track your cosmic knowledge.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer (injected by script.js) -->
+  <div id="footer"></div>
+
+  <!-- This page is Home -->
+  <script>window.ACTIVE_PAGE = "index.html";</script>
+  <!-- Bootstrap JS bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Data + main script -->
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
